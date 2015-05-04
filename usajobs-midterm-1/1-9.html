@@ -1,0 +1,24 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["geochart"]});
+      google.setOnLoadCallback(drawRegionsMap);
+      function drawRegionsMap() {
+        var data = [['State', 'Job Count'], ['US-WA', 407], ['US-WI', 157], ['US-MI', 252], ['US-CT', 78], ['US-AR', 165], ['US-CA', 695], ['US-MD', 381], ['US-TX', 623], ['US-MA', 243], ['US-MO', 268], ['US-NV', 173], ['US-HI', 181], ['US-ME', 52], ['US-NC', 294], ['US-AL', 242], ['US-MS', 179], ['US-IL', 283], ['US-ND', 118], ['US-NM', 360], ['US-VT', 31], ['US-AK', 234], ['US-SD', 241], ['US-WY', 152], ['US-WV', 147], ['US-PA', 235], ['US-NY', 370], ['US-NJ', 137], ['US-MN', 189], ['US-SC', 214], ['US-KY', 178], ['US-KS', 164], ['US-TN', 197], ['US-RI', 41], ['US-GA', 405], ['US-UT', 231], ['US-OK', 353], ['US-NE', 164], ['US-MT', 182], ['US-IA', 96], ['US-CO', 385], ['US-LA', 231], ['US-IN', 170], ['US-ID', 158], ['US-DC', 890], ['US-FL', 337], ['US-AZ', 416], ['US-DE', 52], ['US-OR', 250], ['US-NH', 66], ['US-VA', 611], ['US-OH', 277]]
+        var datatable = google.visualization.arrayToDataTable(data);
+        var options = {'region': 'US', 'width': 600, 'height': 400, 'resolution': 'provinces'};
+        var chart = new google.visualization.GeoChart(document.getElementById('mychart'));
+        chart.draw(datatable, options);
+      }
+    </script>
+      <div class="container">
+        <h1 style="text-align:center">Hello chart</h1>
+        <div id="mychart"></div>
+      </div>
+  </body>
+</html>
