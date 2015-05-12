@@ -1,7 +1,9 @@
 import json
-import requests
 import os
+import requests
+from operator import itemgetter
 from datetime import datetime
+
 CA_FILE = 'data-hold/california.json'
 if not os.path.exists(CA_FILE):
     print("Can't find", CA_FILE, "so fetching remote copy")
@@ -15,11 +17,16 @@ jobs = jdata['jobs']
 
 collection_date = datetime.strptime(jdata['date_collected'], '%Y-%m-%dT%H:%M:%S')
 
-def daysonlist(job):
-    postdate = datetime.strptime(job['StartDate'], '%m/%d/%Y')
-    return (collection_date - postdate ).days
+def cleanmoney(val):
+	x = val.replace('$', '').replace(',', '')
+	return float(x)
 
-for job in sorted(jobs, key = daysonlist):
-    days = daysonlist(job)
-    if days <= 2:
-        print('%s,%s,%s' % (job['JobTitle'], days, job['ApplyOnlineURL']))
+def cleansalarymax(job):
+	return cleanmoney(job['SalaryMax'])
+
+for job in jobs:
+	expire_date = datetime.strptime(job['EndDate'], '%m/%d/%Y')
+	daysleft = str(expire_date - collection_date)
+	if (cleansalarymax(job) >= 90000):
+		if daysleft < 5 and daysleft >= 0:
+			print('%s,%s,%s' % (job['JobTitle'], daysleft, job['ApplyOnlineURL']))
