@@ -22,22 +22,25 @@ def get_ca_cities(job):
 	location = job['Locations']
 	for l in location:
 		if "California" in l.lower():
-				cali_cities += l
+			cali_cities += l
 
 num_cityjobs = {}
 
 for job in jobs:
 	city = get_ca_cities(job)
 	if city in num_cityjobs:
-		if city is not None:
-			num_cityjobs[city] += 1
+		num_cityjobs[city] += 1
 	else:
 		if city is not None:
 			num_cityjobs[city] = 1
 
-sort = sorted(num_cityjobs, key = itemgetter(1), reverse = True)
-chartdata = [['City', 'NumberOfJobs']]
+chartdata = []
 table = []
+for n in num_cityjobs:
+	chartdata.append([n[0], n[1]])
+	table.append([n[0], n[1]])
+
+sort = sorted(num_cityjobs, key = itemgetter(1), reverse = True)
 for s in sort:
 	table.append("<tr><td>%s</td><td>%s</td></tr>" % (s[0], s[1]))
 
