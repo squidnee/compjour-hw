@@ -2,7 +2,10 @@
 
 Online communities provide a great public platform for researching social-psychological phenomena. One particular phenomena I find interesting is social altruism. In this project, I am interested in the factors that contribute to our willingness to be altruistic toward online strangers, and whether we can utilize these discoveries to help out the less fortunate. Online communities provide a great way to release your own identity and strip away human factors that contribute to human bias.
 
-For my final project, I'd like to create a website that reveals insight into online human altruism, using a dataset collected by Jurafsky et al back in 2013. I want to show an interactive graph that pinpoints the factors that go into online altruism, namely.
+For my final project, I'd like to create a website that reveals insight into online human altruism, using a dataset collected by Jurafsky et al back in 2013. I want to show an interactive graph that pinpoints the factors that go into online altruism, namely:
+
+-What kinds of 'buzzwords' signify sincerity or vulnerability?
+-Are we more likely to trust users who are active users of our community? (Aka, is account age and/or number of posts a factor?)
 
 ## The old way
 
