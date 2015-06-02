@@ -14,3 +14,4 @@ However, I am considering changing the focus of my project (and will meet with y
 
 #Mockup
 <img src="/images/mockup.jpg">
+(If the photo doesn't show up, it's in my 'images' folder in this repo.)
