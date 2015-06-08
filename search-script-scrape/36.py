@@ -7,5 +7,5 @@ url = 'http://www.whitehouse.gov/sites/default/files/disclosures/whitehouse-wave
 resp = r.get(url)
 data = csv.DictReader(StringIO(resp.text))
 rows = list(data)
-visitors = len(r for r in rows)
+visitors = len([r for r in rows])
 print(visitors)
