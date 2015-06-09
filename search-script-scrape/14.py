@@ -5,5 +5,5 @@ import requests as r
 import bs4
 url = r.get('https://www.osha.gov/dep/fatcat/dep_fatcat.html')
 soup = bs4.BeautifulSoup(url.text)
-select = soup.select("h5")[1].text
-print(select)
+select = soup.select("h5")[1].text.split()
+print(select[2])
