@@ -1,7 +1,5 @@
-# The number of U.S. congressmembers who have Twitter accounts,
-# according to Sunlight Foundation data.
+# Total number of wildlife strike incidents reported at San Francisco International Airport.
 
 import pandas as pd
-data = pd.read_csv('http://unitedstates.sunlightfoundation.com/legislators/legislators.csv')
-count=data.count()
-print(count.loc['twitter_id'])
+data = pd.read_csv('http://wildlife.faa.gov/downloads/fieldlist.xls')
+print(len(data))

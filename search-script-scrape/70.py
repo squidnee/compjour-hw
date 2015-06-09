@@ -4,4 +4,8 @@ import json
 import requests as r
 url = r.get('https://open.whitehouse.gov/resource/bjhy-fcuv.json')
 data = json.loads(url.text)
-print(data)
+maxd = 0
+for d in data:
+	if float(d['salary']) > maxd:
+		maxd = float(d['salary'])
+print(maxd)

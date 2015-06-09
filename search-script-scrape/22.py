@@ -4,9 +4,11 @@
 
 import requests as r
 import bs4
-url = r.get('http://www.senate.gov/general/committee_assignments/assignments.htm').text
-soup = bs4.BeautifulSoup(url)
+url = r.get('http://www.senate.gov/general/committee_assignments/assignments.htm')
+soup = bs4.BeautifulSoup(url.text)
 select = soup.select("td a")
 for s in select:
 	if s.text.find('Boxer'):
-		print(s.select("tr a").text)
+		print(s.text)
+	else:
+		s.next_element
