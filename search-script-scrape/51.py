@@ -2,7 +2,7 @@
 
 import requests as r
 import bs4
-url = r.get('http://www.supremecourt.gov/')
+url = r.get('http://www.supremecourt.gov/opinions/slipopinions.aspx')
 soup = bs4.BeautifulSoup(url.text)
-select = soup.select("div.panel.panel-scus-two div.panel-body div.recentdecisions ul li a")[0]
+select = soup.select("table td")[5]
 print(select.text)
