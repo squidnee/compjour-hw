@@ -26,7 +26,8 @@ def index():
 	age = i.acc_age(data)
 	items = total_items(data)
 	rate = get_success_rate(data)
-	return render_template('index.html', data=data, post_status=post_status, karma=karma, chars=chars, edited=edited, age=age, items=items, rate=rate)
+	return render_template('index.html', data=data, post_status=post_status, karma=karma,
+		chars=chars, edited=edited, age=age, items=items, rate=rate)
 
 ## NOTE: This page is not technically part of my final project...consider it something that
 ## I'd like to finish up when I have a wee bit more time on my hands. Essentially, I'd like to take
@@ -39,8 +40,8 @@ def sends():
 
 @app.route("/search", methods=['POST'])
 def search():
-	query = request.form.get('query')
-	path = quote_plus(query)
+	search_query = request.form.get('query')
+	path = quote_plus(search_query)
 	return redirect("/query/%s" % path)
 
 @app.route("/query/<query>")
