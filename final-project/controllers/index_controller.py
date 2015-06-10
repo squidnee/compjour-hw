@@ -74,12 +74,3 @@ def acc_age(data):
 			fail.append(age)
 		total = [sorted(success, reverse=False), sorted(fail, reverse=False)]
 	return total
-
-def total_items(data):
-	items = list(data)
-	return len(items)
-
-def get_success_rate(data):
-	success = sum([d['requester_received_pizza'] for d in data])
-	rate = 100.0 * (success / len(list(data)))
-	return rate
