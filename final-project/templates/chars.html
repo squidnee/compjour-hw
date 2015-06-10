@@ -1,0 +1,26 @@
+ {% include 'partials/header.html' %}
+
+ <body>
+  <script type="text/javascript">
+    google.load("visualization", '1.1', {packages:['corechart']});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = #CHART_DATA#;
+      var datatable = google.visualization.arrayToDataTable(data);
+      var options = {
+        width: 800,
+        height: 500,
+        legend: { position: 'none' },
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('mychart'));
+      chart.draw(datatable, options);
+  }
+  </script>
+
+    <div class="container">
+    <h2 class="subtitle">NUMBER OF CHARACTERS IN REQUEST POST</h2>
+      <div id="mychart"></div>
+    </div>
+  </body>
+</html>
