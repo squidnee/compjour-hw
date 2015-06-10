@@ -2,19 +2,22 @@
 
  <body>
   <script type="text/javascript">
-    google.load("visualization", '1.1', {packages:['corechart']});
+    google.load("visualization", '1.1', {packages:['scatter']});
     google.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      var data = #CHART_DATA#;
-      var datatable = google.visualization.arrayToDataTable(data);
+     var data = new google.visualization.DataTable();
+      data.addColumn('Pizza Delivered?', 'Total Chars in Request Post');
+      data.addRows(#CHART_DATA#);
       var options = {
+        hAxis: {title: 'Pizza Delivered?', maxValue = 1, minValue = 0},
+        vAxis: {title: 'Total Chars in Request Post', maxValue = 1000000000, minValue = 0},
         width: 800,
         height: 500,
         legend: { position: 'none' },
       };
-      var chart = new google.visualization.BarChart(document.getElementById('mychart'));
-      chart.draw(datatable, options);
+      var chart = new google.charts.Scatter(document.getElementById('mychart'));
+      chart.draw(data, google.charts.Scatter.convertOptions(options));
   }
   </script>
 

@@ -47,12 +47,12 @@ def posts():
 	filtered = []
 
 	for suc in post_status[0]:
-		filtered.append(['True', suc])
+		filtered.append([1, suc])
 
 	for fail in post_status[1]:
-		filtered.append(['False', fail])
+		filtered.append([0, fail])
 
-	chartdata = [['Rate', 'Votes']]
+	chartdata = []
 	chartdata.extend(filtered)
 	with open("./templates/posts.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(chartdata))
@@ -68,10 +68,10 @@ def karma():
 	filtered = []
 
 	for suc in karma[0]:
-		filtered.append(['True', suc])
+		filtered.append([1, suc])
 
 	for fail in karma[1]:
-		filtered.append(['False', fail])
+		filtered.append([0, fail])
 
 	chartdata = []
 	chartdata.extend(filtered)
@@ -89,10 +89,10 @@ def chars():
 	filtered = []
 
 	for suc in chars[0]:
-		filtered.append(['True', suc])
+		filtered.append([1, suc])
 
 	for fail in chars[1]:
-		filtered.append(['False', fail])
+		filtered.append([0, fail])
 
 	chartdata = []
 	chartdata.extend(filtered)
@@ -110,10 +110,10 @@ def edited():
 	filtered = []
 
 	for suc in edited[0]:
-		filtered.append(['True', suc])
+		filtered.append([1, suc])
 
 	for fail in edited[1]:
-		filtered.append(['False', fail])
+		filtered.append([0, fail])
 
 	chartdata = []
 	chartdata.extend(filtered)
@@ -131,12 +131,12 @@ def age():
 	filtered = []
 
 	for suc in age[0]:
-		filtered.append(['True', suc])
+		filtered.append([1, suc])
 
 	for fail in age[1]:
-		filtered.append(['False', fail])
+		filtered.append([0, fail])
 
-	chartdata = [['Rate', 'AccAge']]
+	chartdata = []
 	chartdata.extend(filtered)
 	with open("./templates/age.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(chartdata))

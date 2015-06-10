@@ -6,17 +6,18 @@
     google.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      var data = #CHART_DATA#;
-      var datatable = google.visualization.arrayToDataTable(data);
+      var data = new google.visualization.DataTable();
+      data.addColumn('Pizza Delivered?', 'Edited: Yes or No');
+      data.addRows(#CHART_DATA#);
       var options = {
-        hAxis: {title: 'Rate', minValue: 'True', maxValue: 'False'},
-        vAxis: {title: 'Value', minValue: 0, maxValue: 15},
+        hAxis: {title: 'Pizza Delivered?', maxValue = 1, minValue = 0},
+        vAxis: {title: 'Edited: Yes or No', maxValue = 1, minValue = 0},
         width: 800,
         height: 500,
         legend: { position: 'none' },
       };
-      var chart = new google.visualization.ScatterChart(document.getElementById('mychart'));
-      chart.draw(datatable, options);
+      var chart = new google.charts.Scatter(document.getElementById('mychart'));
+      chart.draw(data, google.charts.Scatter.convertOptions(options));
   }
   </script>
 
