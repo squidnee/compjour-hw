@@ -41,47 +41,107 @@ def search():
 @app.route("/posts/")
 def posts():
 	temp = "posts.html"
-	html = open("./templates/post.html").read()
+	html = open("./templates/posts.html").read()
 	post_status = i.post_status(data)
 
 	filtered = []
 
-	for p in post_status[0]:
-		filtered.append([True, p])
+	for suc in post_status[0]:
+		filtered.append([True, suc])
 
-	for s in post_status[1]:
-		filtered.append([False, s])
+	for fail in post_status[1]:
+		filtered.append([False, fail])
 
 	chartdata = [['Rate', 'Votes']]
 	chartdata.extend(filtered)
-	with open("./templates/post.html", 'w') as f:
+	with open("./templates/posts.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(chartdata))
 		f.write(html)
-	return render_template(temp, data=data)
+	return render_template(temp, data=data, items=items, rate=rate)
 
 @app.route("/karma/")
 def karma():
 	temp = "karma.html"
+	html = open("./templates/karma.html").read()
 	karma = i.user_karma(data)
-	return render_template(temp, data=data, karma=karma, items=items, rate=rate)
+
+	filtered = []
+
+	for suc in karma[0]:
+		filtered.append([True, suc])
+
+	for fail in karma[1]:
+		filtered.append([False, fail])
+
+	chartdata = [['Rate', 'Karma']]
+	chartdata.extend(filtered)
+	with open("./templates/karma.html", 'w') as f:
+		html = html.replace('#CHART_DATA#', str(chartdata))
+		f.write(html)
+	return render_template(temp, data=data, items=items, rate=rate)
 
 @app.route("/chars/")
 def chars():
 	temp = "chars.html"
 	chars = i.num_chars_in_post(data)
+	html = open("./templates/chars.html").read()
+
+	filtered = []
+
+	for suc in chars[0]:
+		filtered.append([True, suc])
+
+	for fail in chars[1]:
+		filtered.append([False, fail])
+
+	chartdata = [['Rate', 'Chars']]
+	chartdata.extend(filtered)
+	with open("./templates/chars.html", 'w') as f:
+		html = html.replace('#CHART_DATA#', str(chartdata))
+		f.write(html)
 	return render_template(temp, data=data, chars=chars, items=items, rate=rate)
 
 @app.route("/edited/")
-def edited(query):
+def edited():
 	temp = "edited.html"
 	edited = i.edited(data)
-	return render_template(temp, data=data, edited=edited, items=items, rate=rate)
+	html = open("./templates/edited.html").read()
+
+	filtered = []
+
+	for suc in edited[0]:
+		filtered.append([True, suc])
+
+	for fail in edited[1]:
+		filtered.append([False, fail])
+
+	chartdata = [['Rate', 'Edited']]
+	chartdata.extend(filtered)
+	with open("./templates/edited.html", 'w') as f:
+		html = html.replace('#CHART_DATA#', str(chartdata))
+		f.write(html)
+	return render_template(temp, data=data, items=items, rate=rate)
 
 @app.route("/age/")
-def age(query):
+def age():
 	temp = "age.html"
 	age = i.acc_age(data)
-	return render_template('results.html', data=data, age=age, items=items, rate=rate)
+	html = open("./templates/age.html").read()
+
+	filtered = []
+
+	for suc in age[0]:
+		filtered.append([True, suc])
+
+	for fail in age[1]:
+		filtered.append([False, fail])
+
+	chartdata = [['Rate', 'AccAge']]
+	chartdata.extend(filtered)
+	with open("./templates/age.html", 'w') as f:
+		html = html.replace('#CHART_DATA#', str(chartdata))
+		f.write(html)
+	return render_template(temp, data=data, items=items, rate=rate)
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
