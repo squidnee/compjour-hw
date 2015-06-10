@@ -47,10 +47,10 @@ def posts():
 	filtered = []
 
 	for suc in post_status[0]:
-		filtered.append([True, suc])
+		filtered.append(['True', suc])
 
 	for fail in post_status[1]:
-		filtered.append([False, fail])
+		filtered.append(['False', fail])
 
 	chartdata = [['Rate', 'Votes']]
 	chartdata.extend(filtered)
@@ -68,12 +68,12 @@ def karma():
 	filtered = []
 
 	for suc in karma[0]:
-		filtered.append([True, suc])
+		filtered.append(['True', suc])
 
 	for fail in karma[1]:
-		filtered.append([False, fail])
+		filtered.append(['False', fail])
 
-	chartdata = [['Rate', 'Karma']]
+	chartdata = []
 	chartdata.extend(filtered)
 	with open("./templates/karma.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(chartdata))
@@ -89,12 +89,12 @@ def chars():
 	filtered = []
 
 	for suc in chars[0]:
-		filtered.append([True, suc])
+		filtered.append(['True', suc])
 
 	for fail in chars[1]:
-		filtered.append([False, fail])
+		filtered.append(['False', fail])
 
-	chartdata = [['Rate', 'Chars']]
+	chartdata = []
 	chartdata.extend(filtered)
 	with open("./templates/chars.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(chartdata))
@@ -110,12 +110,12 @@ def edited():
 	filtered = []
 
 	for suc in edited[0]:
-		filtered.append([True, suc])
+		filtered.append(['True', suc])
 
 	for fail in edited[1]:
-		filtered.append([False, fail])
+		filtered.append(['False', fail])
 
-	chartdata = [['Rate', 'Edited']]
+	chartdata = []
 	chartdata.extend(filtered)
 	with open("./templates/edited.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(chartdata))
@@ -131,10 +131,10 @@ def age():
 	filtered = []
 
 	for suc in age[0]:
-		filtered.append([True, suc])
+		filtered.append(['True', suc])
 
 	for fail in age[1]:
-		filtered.append([False, fail])
+		filtered.append(['False', fail])
 
 	chartdata = [['Rate', 'AccAge']]
 	chartdata.extend(filtered)

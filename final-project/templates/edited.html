@@ -2,18 +2,20 @@
 
  <body>
   <script type="text/javascript">
-    google.load("visualization", '1.1', {packages:['corechart']});
+    google.load("visualization", '1.1', {packages:['scatter']});
     google.setOnLoadCallback(drawChart);
 
     function drawChart() {
       var data = #CHART_DATA#;
       var datatable = google.visualization.arrayToDataTable(data);
       var options = {
+        hAxis: {title: 'Rate', minValue: 'True', maxValue: 'False'},
+        vAxis: {title: 'Value', minValue: 0, maxValue: 15},
         width: 800,
         height: 500,
         legend: { position: 'none' },
       };
-      var chart = new google.visualization.BarChart(document.getElementById('mychart'));
+      var chart = new google.visualization.ScatterChart(document.getElementById('mychart'));
       chart.draw(datatable, options);
   }
   </script>
