@@ -6,7 +6,7 @@
     google.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      var data = #CHART_DATA#;
+      var data = '#CHART_DATA#'
       var datatable = google.visualization.arrayToDataTable(data);
       var options = {
         width: 800,
@@ -20,7 +20,11 @@
 
     <div class="container">
     <h2 class="subtitle">NUMBER OF UPVOTES ON REQUEST</h2>
-      <div id="mychart"></div>
+    <p>
+      <div class="mychart"></div>
+    </div>
+    <p></p>
     </div>
   </body>
-</html>
+
+  {% include 'partials/footer.html' %}

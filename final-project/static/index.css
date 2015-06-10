@@ -8,6 +8,14 @@ h1.bigheader {
 	font-size: 60px;
 }
 
+h2.title {
+
+}
+
+h2.subtitle {
+
+}
+
 div.container {
 
 }
@@ -22,6 +30,10 @@ input#search_bar {
 
 input#submit_button {
 	
+}
+
+div.mychart {
+
 }
 
 div.footer {

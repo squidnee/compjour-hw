@@ -36,26 +36,40 @@ def sends():
 def search():
 	search_query = request.form.get('query')
 	path = quote_plus(search_query)
-	return redirect("/query/%s" % path)
+	return redirect("/%s" % path)
 
 @app.route("/posts/")
-def posts(query):
+def posts():
 	temp = "posts.html"
+	html = open("./templates/post.html").read()
 	post_status = i.post_status(data)
-	return render_template(temp, data=data, post_status=post_status, items=items, rate=rate)
+
+	filtered = []
+
+	for p in post_status[0]:
+		filtered.append([True, p])
+
+	for s in post_status[1]:
+		filtered.append([False, s])
+
+	chartdata = [['Rate', 'Votes']]
+	chartdata.extend(filtered)
+	with open("./templates/post.html", 'w') as f:
+		html = html.replace('#CHART_DATA#', str(chartdata))
+		f.write(html)
+	return render_template(temp, data=data)
 
 @app.route("/karma/")
-def karma(query):
+def karma():
 	temp = "karma.html"
 	karma = i.user_karma(data)
 	return render_template(temp, data=data, karma=karma, items=items, rate=rate)
 
 @app.route("/chars/")
-def chars(query):
+def chars():
 	temp = "chars.html"
 	chars = i.num_chars_in_post(data)
 	return render_template(temp, data=data, chars=chars, items=items, rate=rate)
-
 
 @app.route("/edited/")
 def edited(query):

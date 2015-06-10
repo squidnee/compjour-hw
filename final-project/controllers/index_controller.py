@@ -19,7 +19,7 @@ def post_status(data):
 			success.append(votes)
 		else:
 			fail.append(votes)
-		total = [sorted(success, reverse=False), sorted(fail, reverse=True)]
+		total = [sorted(success, reverse=False), sorted(fail, reverse=False)]
 	return total
 
 def user_karma(data):
