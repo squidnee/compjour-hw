@@ -1,6 +1,6 @@
 <head>
   <link href='http://fonts.googleapis.com/css?family=EB+Garamond|Cinzel+Decorative:400,700|Raleway|Marta' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="/stylesheets/index.css">
+      <link rel="stylesheet" href="/static/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
   <title>Who gets pizza?</title>
@@ -10,7 +10,15 @@
 
 <body>
 <div class="container">
-The query bar will go here.
+  <form action="/search" method="POST">
+      <h4>Type in a query below to find out.</h4>
+      <br>
+      <h5><em>Hint...see below for the kinds of queries you can search for.</em></h5>
+
+      <input name='query' id="search_bar" value="">
+      <br>
+      <input type="submit" value="GO!" id="submit_button">
+    </form>
 </div>
 <div class="about">
 About this site: coming soon.
