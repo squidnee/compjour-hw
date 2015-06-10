@@ -1,7 +1,6 @@
-import controller
-from flask import flask
-from flask import abort
-from flask import render_template
+from flask import Flask, abort, render_template, request, redirect
+from controllers import index_controller, sends_controller
+
 app = Flask(__name__)
 
 bool success = true
@@ -10,10 +9,16 @@ bool fail = false
 @app.route("/")
 def index():
 	data = controller.load()
-	layout = 'index.html'
-	return render_template(layout, data=data)
+	return render_template('index.html', data=data)
 
-## Still figuring out what to put here. Will be updated soon. ##
+@app.route("/search", methods=['POST'])
+def search():
+	query = request.form.get('query')
+	path = quote_plus(query)
+	return redirect("/address/%s" % path)
+
+@app.route("/index_results")
+
 @app.route('/<row_id>/')
 def success(row_id):
 	return
