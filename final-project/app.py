@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-data = index_controller.get_data()
+data = i.get_data()
 
 def total_items(data):
 	items = list(data)
@@ -17,17 +17,11 @@ def get_success_rate(data):
 	rate = 100.0 * (success / len(list(data)))
 	return rate
 
+items = total_items(data)
+rate = get_success_rate(data)
 @app.route("/")
 def index():
-	post_status = i.post_status(data)
-	karma = i.user_karma(data)
-	chars = i.num_chars_in_post(data)
-	edited = i.edited(data)
-	age = i.acc_age(data)
-	items = total_items(data)
-	rate = get_success_rate(data)
-	return render_template('index.html', data=data, post_status=post_status, karma=karma,
-		chars=chars, edited=edited, age=age, items=items, rate=rate)
+	return render_template('index.html', data=data, items=items, rate=rate)
 
 ## NOTE: This page is not technically part of my final project...consider it something that
 ## I'd like to finish up when I have a wee bit more time on my hands. Essentially, I'd like to take
@@ -44,13 +38,36 @@ def search():
 	path = quote_plus(search_query)
 	return redirect("/query/%s" % path)
 
-@app.route("/query/<query>")
-def results(query):
-	return render_template('results.html')
+@app.route("/posts/")
+def posts(query):
+	temp = "posts.html"
+	post_status = i.post_status(data)
+	return render_template(temp, data=data, post_status=post_status, items=items, rate=rate)
 
-@app.route('/<row_id>/')
-def success(row_id):
-	return
+@app.route("/karma/")
+def karma(query):
+	temp = "karma.html"
+	karma = i.user_karma(data)
+	return render_template(temp, data=data, karma=karma, items=items, rate=rate)
+
+@app.route("/chars/")
+def chars(query):
+	temp = "chars.html"
+	chars = i.num_chars_in_post(data)
+	return render_template(temp, data=data, chars=chars, items=items, rate=rate)
+
+
+@app.route("/edited/")
+def edited(query):
+	temp = "edited.html"
+	edited = i.edited(data)
+	return render_template(temp, data=data, edited=edited, items=items, rate=rate)
+
+@app.route("/age/")
+def age(query):
+	temp = "age.html"
+	age = i.acc_age(data)
+	return render_template('results.html', data=data, age=age, items=items, rate=rate)
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
