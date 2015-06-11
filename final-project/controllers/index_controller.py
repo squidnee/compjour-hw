@@ -9,68 +9,136 @@ def get_data():
 	return data
 
 def post_status(data):
-	success = []
-	fail = []
+	success = {}
+	fail = {}
 	for d in data:
 		up = int(d['number_of_upvotes_of_request_at_retrieval'])
 		down = int(d['number_of_downvotes_of_request_at_retrieval'])
 		votes = (up - down)
 		if d['requester_received_pizza'] == True:
-			success.append(votes)
+			if str(votes) in success:
+				success[str(votes)] += 1
+			else:
+				success[str(votes)] = 1
 		else:
-			fail.append(votes)
-		total = [sorted(success, reverse=False), sorted(fail, reverse=False)]
+			if votes in fail:
+				fail[str(votes)] += 1
+			else:
+				fail[str(votes)] = 1
+
+		total = [success, fail]
 	return total
 
 def user_karma(data):
-	success = []
-	fail = []
+	success = {}
+	fail = {}
 	for d in data:
 		karma = int(d['requester_upvotes_minus_downvotes_at_request'])
 		if d['requester_received_pizza'] == True:
-			success.append(karma)
+			if karma in success:
+				success[karma] += 1
+			else:
+				success[karma] = 1
 		else:
-			fail.append(karma)
-		total = [sorted(success, reverse=False), sorted(fail, reverse=True)]
+			if karma in fail:
+				fail[karma] += 1
+			else:
+				fail[karma] = 1
+
+		success_tup = success.items()
+		fail_tup = fail.items()
+		
+		success_tup = [(v,k) for k, v in success_tup]
+		fail_tup = [(v,k) for k, v in fail_tup]
+
+		success_tup.sort(reverse=True)
+		fail_tup.sort(reverse=True)
+
+		success_tup = [(v,k) for k, v in success_tup]
+		fail_tup = [(v,k) for k, v in fail_tup]
+
+		total = [success_tup, fail_tup]
 	return total
 
 def num_chars_in_post(data):
-	success = []
-	fail = []
+	success = {'1000+':0, '500-1000':0, '200-500':0, '0-200':0}
+	fail = {'1000+':0, '500-1000':0, '200-500':0, '0-200':0}
 	for d in data:
 		chars = len(d['request_text'])
 		if d['requester_received_pizza']:
-			success.append(chars)
+			if chars > 1000:
+				success['1000+'] += 1;
+			if chars > 500:
+				success['500-1000'] += 1;
+			elif chars > 200:
+				success['200-500'] += 1;
+			else:
+				success['0-200'] += 1;
 		else:
-			fail.append(chars)
-		total = [sorted(success, reverse=False), sorted(fail, reverse=False)]
+			if chars > 1000:
+				fail['1000+'] += 1;
+			elif chars > 500:
+				fail['500-1000'] += 1;
+			elif chars > 200:
+				fail['200-500'] += 1;
+			else:
+				fail['0-200'] += 1;
+
+	success_array = []
+	fail_array = []
+	for k in success:
+		success_array.append([k, success[k]])
+	for k in fail:
+		fail_array.append([k, fail[k]])
+	total = [success_array, fail_array]
 	return total
+print(num_chars_in_post(get_data()))
 
 def edited(data):
+	success_e = []
 	success = []
+	fail_e = []
 	fail = []
 	for d in data:
 		if d['requester_received_pizza']:
 			if d['post_was_edited']:
-				success.append(0)
+				success_e.append(0)
 			else:
-				success.append(1)
+				success.append(0)
 		else:
 			if d['post_was_edited']:
-				fail.append(0)
+				fail_e.append(0)
 			else:
-				fail.append(1)
-		total = [sorted(success, reverse=False), sorted(fail, reverse=False)]
+				fail.append(0)
+		total = [len(success_e), len(success), len(fail_e), len(fail)]
 	return total
 
 def acc_age(data):
-	success = []
-	fail = []
+	success = {'0-10': 0, '10-50': 0, '50-250': 0, '250-1000':0, '1000+': 0}
+	fail = {'0-10': 0, '10-50': 0, '50-250': 0, '250-1000':0, '1000+': 0}
 	for d in data:
 		age = int(d['requester_account_age_in_days_at_request'])
 		if d['requester_received_pizza']:
-			success.append(age)
+			if age > 1000:
+				success['1000+'] += 1;
+			elif age > 250:
+				success['250-1000'] += 1;
+			elif age > 50:
+				success['50-250'] += 1;
+			elif age > 10:
+				success['10-50'] += 1;
+			else:
+				success['0-10'] += 1;
 		else:
-			fail.append(age)
-		total = [sorted(success, reverse=False), sorted(fail, reverse=False)]
+			if age > 1000:
+				fail['1000+'] += 1;
+			elif age > 250:
+				fail['250-1000'] += 1;
+			elif age > 50:
+				fail['50-250'] += 1;
+			elif age > 10:
+				fail['10-50'] += 1;
+			else:
+				fail['0-10'] += 1;
+		total = [success, fail]
 	return total

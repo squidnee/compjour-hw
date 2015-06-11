@@ -45,16 +45,6 @@ def posts():
 	post_status = i.post_status(data)
 
 	filtered = [['X', 'Success', 'Fail']]
-	x = 0
-	array = []
-
-	for post in post_status:
-		for p in post:
-			array.append(x)
-			array.append(post_status[0][p])
-			array.append(post_status[1][p])
-			x = x + 1
-			filtered.append(array)
 
 	with open("./templates/posts.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(filtered))
@@ -69,12 +59,6 @@ def karma():
 
 	filtered = []
 
-	for suc in karma[0]:
-		filtered.append([1, suc])
-
-	for fail in karma[1]:
-		filtered.append([0, fail])
-
 	chartdata = []
 	chartdata.extend(filtered)
 	with open("./templates/karma.html", 'w') as f:
@@ -86,20 +70,20 @@ def karma():
 def chars():
 	temp = "chars.html"
 	chars = i.num_chars_in_post(data)
+	success = chars[0]
+	fail = chars[1]
 	html = open("./templates/chars.html").read()
 
-	filtered = []
+	filtered = [['Bucket', 'Success', 'Fail']]
 
-	for suc in chars[0]:
-		filtered.append([1, suc])
+	for k in range(len(success)):
+		s = success[k]
+		f = fail[k]
+		key = s[0]
+		filtered.append([key, s[1], f[1]])
 
-	for fail in chars[1]:
-		filtered.append([0, fail])
-
-	chartdata = []
-	chartdata.extend(filtered)
 	with open("./templates/chars.html", 'w') as f:
-		html = html.replace('#CHART_DATA#', str(chartdata))
+		html = html.replace('#CHART_DATA#', str(filtered))
 		f.write(html)
 	return render_template(temp, data=data, chars=chars, items=items, rate=rate)
 

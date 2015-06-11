@@ -11,21 +11,17 @@
 
     <script type="text/javascript">
       google.setOnLoadCallback(drawChart);
-
       function drawChart() {
         var data = google.visualization.arrayToDataTable(
           #CHART_DATA#
         );
-
         var options = {
           width: 800,
           height: 800,
           curveType: 'function',
           legend: { position: 'bottom' }
         };
-
         var chart = new google.visualization.LineChart(document.getElementById('mychart'));
-
         chart.draw(data, options);
       }
     </script>
@@ -36,4 +32,3 @@
     </div>
 
     {% include 'partials/footer.html' %}
-
