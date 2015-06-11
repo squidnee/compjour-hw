@@ -1,23 +1,29 @@
  {% include 'partials/header.html' %}
 
  <body>
-  <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['scatter']}]}">
-    google.load("visualization", '1.1', {packages:['scatter']});
+  <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
     google.setOnLoadCallback(drawChart);
-
     function drawChart() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('Pizza Delivered?', 'Edited: Yes or No');
-      data.addRows(#CHART_DATA#);
+      var data = google.visualization.arrayToDataTable(
+        [['Success? Edited?', 'Num. Requesters', {role: "style"}], ['Success - Edited', 365, 'green'], ['Success - Unedited', 1032, 'green'], ['Fail - Edited', 564, 'red'], ['Fail - Unedited', 3710, 'red']]
+      );
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
       var options = {
-        hAxis: {title: 'Pizza Delivered?', maxValue = 1, minValue = 0},
-        vAxis: {title: 'Edited: Yes or No', maxValue = 1, minValue = 0},
-        width: 800,
+        width: 1000,
         height: 500,
-        legend: { position: 'none' },
+        legend: { position: "center" },
       };
-      var chart = new google.charts.Scatter(document.getElementById('mychart'));
-      chart.draw(data, google.charts.Scatter.convertOptions(options));
+      var chart = new google.visualization.ColumnChart(document.getElementById('mychart'));
+      chart.draw(view, options);
   }
   </script>
 

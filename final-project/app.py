@@ -93,18 +93,13 @@ def edited():
 	edited = i.edited(data)
 	html = open("./templates/edited.html").read()
 
-	filtered = []
-
-	for suc in edited[0]:
-		filtered.append([1, suc])
-
-	for fail in edited[1]:
-		filtered.append([0, fail])
-
-	chartdata = []
-	chartdata.extend(filtered)
+	filtered = [["Success/Edited?", "Value", "Color"]]
+	filtered.append(["Success - Edited", edited[0], 'green'])
+	filtered.append(["Success - Unedited", edited[1], 'green'])
+	filtered.append(["Fail - Edited", edited[2], 'red'])
+	filtered.append(["Fail - Unedited", edited[3], 'red'])
 	with open("./templates/edited.html", 'w') as f:
-		html = html.replace('#CHART_DATA#', str(chartdata))
+		html = html.replace('#CHART_DATA#', str(filtered))
 		f.write(html)
 	return render_template(temp, data=data, items=items, rate=rate)
 
