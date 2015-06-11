@@ -92,7 +92,6 @@ def num_chars_in_post(data):
 		fail_array.append([k, fail[k]])
 	total = [success_array, fail_array]
 	return total
-print(num_chars_in_post(get_data()))
 
 def edited(data):
 	success_e = []
@@ -140,5 +139,12 @@ def acc_age(data):
 				fail['10-50'] += 1;
 			else:
 				fail['0-10'] += 1;
-		total = [success, fail]
+
+	success_array = []
+	fail_array = []
+	for k in success:
+		success_array.append([k, success[k]])
+	for k in fail:
+		fail_array.append([k, fail[k]])
+	total = [sorted(success_array), sorted(fail_array)]
 	return total

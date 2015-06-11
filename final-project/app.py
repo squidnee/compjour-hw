@@ -107,14 +107,17 @@ def edited():
 def age():
 	temp = "age.html"
 	age = i.acc_age(data)
+	success = age[0]
+	fail = age[1]
 	html = open("./templates/age.html").read()
-	filtered = []
 
-	for suc in age[0]:
-		filtered.append([1, suc])
+	filtered = [['Bucket', 'Success', 'Fail']]
 
-	for fail in age[1]:
-		filtered.append([0, fail])
+	for k in range(len(success)):
+		s = success[k]
+		f = fail[k]
+		key = s[0]
+		filtered.append([key, s[1], f[1]])
 	with open("./templates/age.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(filtered))
 		f.write(html)
