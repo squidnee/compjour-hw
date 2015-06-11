@@ -1,27 +1,39 @@
  {% include 'partials/header.html' %}
+<body>
+    <script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
 
- <body>
-  <script type="text/javascript">
-    google.load("visualization", '1.1', {packages:['scatter']});
-    google.setOnLoadCallback(drawChart);
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('Pizza Delivered?', 'Request Post Karma');
-      data.addRows(#CHART_DATA#);
-      var options = {
-        width: 800,
-        height: 500,
-        legend: { position: 'none' },
-      };
-      var chart = new google.charts.Scatter(document.getElementById('mychart'));
-      chart.draw(data, google.charts.Scatter.convertOptions(options));
-  }
-  </script>
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+          #CHART_DATA#
+        );
 
-    <div class="container">
-    <h2 class="subtitle">NUMBER OF UPVOTES ON REQUEST</h2>
-      <div class="mychart"></div>
-  </body>
+        var options = {
+          width: 800,
+          height: 800,
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
 
-  {% include 'partials/footer.html' %}
+        var chart = new google.visualization.LineChart(document.getElementById('mychart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+   <div class="container">
+    <h2 class="subtitle">NUMBER OF VOTES ON REQUEST POST</h2>
+      <div id="mychart"></div>
+    </div>
+
+    {% include 'partials/footer.html' %}
+

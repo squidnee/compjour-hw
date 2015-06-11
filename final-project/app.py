@@ -44,18 +44,20 @@ def posts():
 	html = open("./templates/posts.html").read()
 	post_status = i.post_status(data)
 
-	filtered = []
+	filtered = [['X', 'Success', 'Fail']]
+	x = 0
+	array = []
 
-	for suc in post_status[0]:
-		filtered.append([1, suc])
+	for post in post_status:
+		for p in post:
+			array.append(x)
+			array.append(post_status[0][p])
+			array.append(post_status[1][p])
+			x = x + 1
+			filtered.append(array)
 
-	for fail in post_status[1]:
-		filtered.append([0, fail])
-
-	chartdata = []
-	chartdata.extend(filtered)
 	with open("./templates/posts.html", 'w') as f:
-		html = html.replace('#CHART_DATA#', str(chartdata))
+		html = html.replace('#CHART_DATA#', str(filtered))
 		f.write(html)
 	return render_template(temp, data=data, items=items, rate=rate)
 
@@ -127,7 +129,6 @@ def age():
 	temp = "age.html"
 	age = i.acc_age(data)
 	html = open("./templates/age.html").read()
-
 	filtered = []
 
 	for suc in age[0]:
@@ -135,11 +136,8 @@ def age():
 
 	for fail in age[1]:
 		filtered.append([0, fail])
-
-	chartdata = []
-	chartdata.extend(filtered)
 	with open("./templates/age.html", 'w') as f:
-		html = html.replace('#CHART_DATA#', str(chartdata))
+		html = html.replace('#CHART_DATA#', str(filtered))
 		f.write(html)
 	return render_template(temp, data=data, items=items, rate=rate)
 

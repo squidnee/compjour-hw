@@ -1,7 +1,7 @@
  {% include 'partials/header.html' %}
 
  <body>
-  <script type="text/javascript">
+  <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['scatter']}]}">
     google.load("visualization", '1.1', {packages:['scatter']});
     google.setOnLoadCallback(drawChart);
 
@@ -23,7 +23,7 @@
 
     <div class="container">
     <h2 class="subtitle">WHETHER REQUEST POST WAS EDITED OR NOT</h2>
-      <div class="mychart"></div>
+      <div id="mychart"></div>
     </div>
 
 {% include 'partials/footer.html' %}
