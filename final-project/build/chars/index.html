@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='http://fonts.googleapis.com/css?family=EB+Garamond|Cinzel+Decorative:400,700|Raleway|Marta' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="/static/index.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Who gets pizza?</title>
+ </head>
+
+ <h1 class="bigheader">WHO GETS PIZZA?</h1>
+<p></p>
+ <h2 class="title">You searched for success of pizza requests relative to...</h2>
+
+ <body>
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["bar"]});
+      google.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable(
+          [['Bucket', 'Success', 'Fail'], ['200-500', 634, 1901], ['0-200', 254, 1405], ['500-1000', 509, 758], ['1000+', 122, 210]]
+        );
+
+        var options = {
+          height: 500,
+          width: 900,
+        };
+
+      var chart = new google.charts.Bar(document.getElementById('mychart'));
+      chart.draw(data, options);
+    };
+    </script>
+
+    <div class="container">
+    <h2 class="subtitle">NUMBER OF CHARACTERS IN REQUEST POST</h2>
+      <div id="mychart"></div>
+    </div>
+
+</body>
+The data used for this project belongs to Dan Jurafsky, Cristian Danescu-Niculescu-Mizil, and Tim Althoff. More info can be found <a href="http://cs.stanford.edu/~althoff/raop-dataset/">here</a>.
+<p>
+The dataset is released with the following paper:
+<br>
+How to Ask for a Favor: A Case Study on the Success of Altruistic Requests 
+<br>
+Tim Althoff, Cristian Danescu-Niculescu-Mizil, Dan Jurafsky
+<br>
+Proceedings of ICWSM, 2014.
+<p>
+Contact:
+<br>
+althoff@stanford.edu<br>
+cristian@mpi-sws.org
+</html>
