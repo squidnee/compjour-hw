@@ -56,13 +56,18 @@ def karma():
 	temp = "karma.html"
 	html = open("./templates/karma.html").read()
 	karma = i.user_karma(data)
+	success = karma[0]
+	fail = karma[1]
 
-	filtered = []
+	filtered = [['Bucket', 'Success', 'Fail']]
 
-	chartdata = []
-	chartdata.extend(filtered)
+	for k in range(len(success)):
+		s = success[k]
+		f = fail[k]
+		key = s[0]
+		filtered.append([key, s[1], f[1]])
 	with open("./templates/karma.html", 'w') as f:
-		html = html.replace('#CHART_DATA#', str(chartdata))
+		html = html.replace('#CHART_DATA#', str(filtered))
 		f.write(html)
 	return render_template(temp, data=data, items=items, rate=rate)
 
