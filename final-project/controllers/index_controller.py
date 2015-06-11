@@ -9,24 +9,38 @@ def get_data():
 	return data
 
 def post_status(data):
-	success = {}
-	fail = {}
+	success = {'0-10': 0, '10-25': 0, '25-50': 0, '50+':0}
+	fail = {'0-10': 0, '10-25': 0, '25-50': 0, '50+':0}
 	for d in data:
 		up = int(d['number_of_upvotes_of_request_at_retrieval'])
 		down = int(d['number_of_downvotes_of_request_at_retrieval'])
 		votes = (up - down)
 		if d['requester_received_pizza'] == True:
-			if str(votes) in success:
-				success[str(votes)] += 1
+			if votes > 50:
+				success['50+'] += 1;
+			elif votes > 25:
+				success['25-50'] += 1;
+			elif votes > 10:
+				success['10-25'] += 1;
 			else:
-				success[str(votes)] = 1
+				success['0-10'] += 1;
 		else:
-			if votes in fail:
-				fail[str(votes)] += 1
+			if votes > 50:
+				fail['50+'] += 1;
+			elif votes > 25:
+				fail['25-50'] += 1;
+			elif votes > 10:
+				fail['10-25'] += 1;
 			else:
-				fail[str(votes)] = 1
+				fail['0-10'] += 1;
 
-		total = [success, fail]
+	success_array = []
+	fail_array = []
+	for k in success:
+		success_array.append([k, success[k]])
+	for k in fail:
+		fail_array.append([k, fail[k]])
+	total = [sorted(success_array), sorted(fail_array)]
 	return total
 
 def user_karma(data):
@@ -61,7 +75,6 @@ def user_karma(data):
 		fail_array.append([k, fail[k]])
 	total = [success_array, fail_array]
 	return total
-print(user_karma(get_data()))
 
 def num_chars_in_post(data):
 	success = {'1000+':0, '500-1000':0, '200-500':0, '0-200':0}

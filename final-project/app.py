@@ -42,9 +42,17 @@ def search():
 def posts():
 	temp = "posts.html"
 	html = open("./templates/posts.html").read()
-	post_status = i.post_status(data)
+	posts = i.post_status(data)
+	success = posts[0]
+	fail = posts[1]
 
-	filtered = [['X', 'Success', 'Fail']]
+	filtered = [['Bucket', 'Success', 'Fail']]
+
+	for k in range(len(success)):
+		s = success[k]
+		f = fail[k]
+		key = s[0]
+		filtered.append([key, s[1], f[1]])
 
 	with open("./templates/posts.html", 'w') as f:
 		html = html.replace('#CHART_DATA#', str(filtered))

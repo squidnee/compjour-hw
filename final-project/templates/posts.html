@@ -1,29 +1,23 @@
  {% include 'partials/header.html' %}
 <body>
-    <script type="text/javascript"
-          src="https://www.google.com/jsapi?autoload={
-            'modules':[{
-              'name':'visualization',
-              'version':'1',
-              'packages':['corechart']
-            }]
-          }"></script>
-
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(
-          #CHART_DATA#
+      google.load("visualization", "1.1", {packages:["bar"]});
+      google.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable(
+          [['Bucket', 'Success', 'Fail'], ['0-10', 1219, 4062], ['10-25', 138, 179], ['25-50', 28, 22], ['50+', 12, 11]]
         );
+
         var options = {
-          width: 800,
-          height: 800,
-          curveType: 'function',
-          legend: { position: 'bottom' }
+          height: 500,
+          width: 900,
         };
-        var chart = new google.visualization.LineChart(document.getElementById('mychart'));
-        chart.draw(data, options);
-      }
+
+      var chart = new google.charts.Bar(document.getElementById('mychart'));
+      chart.draw(data, options);
+    };
     </script>
 
    <div class="container">
